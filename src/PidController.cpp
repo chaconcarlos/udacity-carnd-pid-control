@@ -12,8 +12,8 @@
 //static const double INITIAL_P_VALUE    = 0.165; /* Initial Parameter for P */
 //static const double INITIAL_I_VALUE    = 0.000; /* Initial Parameter for I */
 //static const double INITIAL_D_VALUE    = 3;     /* Initial Parameter for D */
-static const double INITIAL_P_VALUE    = 0.259545;
-static const double INITIAL_I_VALUE    = 0.0050;
+static const double INITIAL_P_VALUE    = 0.309545;
+static const double INITIAL_I_VALUE    = 0.03;
 static const double INITIAL_D_VALUE    = 5.757;
 static const int    SETTLE_STEPS_COUNT = 100;
 static const int    TWIDDLE_LOOP_STEPS = 1150;
