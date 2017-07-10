@@ -4,8 +4,6 @@
 /* INCLUDES ******************************************************************/
 
 #include <cstdlib>
-#include <cmath>
-#include <deque>
 #include <vector>
 
 /* CLASS DECLARATION *********************************************************/
@@ -36,6 +34,13 @@ class PidController
   public:
 
     /**
+     * @brief Enables parameter tuning.
+     *
+     * @param enable Inidicates if the parameter tuning should be enabled.
+     */
+    void enableParameterTuning(bool enable = true);
+
+    /**
      * @brief Updates the cross-track error.
      *
      * @param cte The new cross-track error.
@@ -50,54 +55,51 @@ class PidController
     double getTotalError();
 
     /**
-     * @brief Does the twiddle process to correct the parameters.
+     * @brief Indicates if a tuning iteration has been finished.
      *
-     * @return true if the parameters need more adjusting.
+     * @return true if the tuning iteration is finished.
      */
-    bool twiddle();
+    bool isTuningIterationFinished();
 
   private:
 
     /**
-     * @brief Gets the total of the factors.
-     *
-     * @return The total of the factors.
+     * @brier Initializes the PID controller.
      */
-    double getFactorsTotal();
+    void initialize();
 
     /**
-     * @brief Gets the sum of the errors cache.
-     *
-     * @return The sum of the errors cache.
+     * @brief Does an iteration of the process that tunes the parameters.
      */
-    double getErrorCacheSum();
+    void tune();
 
     /**
-     * @brief Increments the current variable index.
+     * @brief Does fine tuning for the current parameter.
      */
-    void incrementCurrentVariableIndex();
+    void tuneCurrentParameter();
 
     /**
-     * @brief Inserts an error in the cache.
-     *
-     * @param cte The CTE to insert.
+     * @brief Loads the index next parameter to be tuned.
      */
-    void insertError(double cte);
+    void setNextParameter();
 
   private:
 
-    double              m_bestError;
-    double              m_cumulativeError;
+    bool                m_isEnabledParameterTuning;
+    bool                m_firstAdjustmentDone;
+    bool                m_secondAdjustmentDone;
+    bool                m_isTuningIterationFinished;
+    size_t              m_currentIteration;
+    size_t              m_currentStep;
+    size_t              m_currentParameterIndex;
     double              m_proportionalError;
     double              m_integralError;
     double              m_derivativeError;
-    bool                m_isFirstRun;
-    bool                m_firstAdjusmentDone;
-    bool                m_secondAdjusmentDone;
-    std::deque<double>  m_errorCache;
-    size_t              m_currentVariable;
+    double              m_bestError;
+    double              m_accumulatedError;
+    std::vector<double> m_bestKs;
     std::vector<double> m_ks;
-    std::vector<double> m_factors;
+    std::vector<double> m_dp;
 };
 
 #endif /* PID_H */
