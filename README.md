@@ -1,7 +1,28 @@
 # CarND-Controls-PID
 Self-Driving Car Engineer Nanodegree Program
-
 ---
+##Overview
+
+In this project, is necessary to build a PID controller that will handle the inputs from the Udacity's SDCE Term 2 simulator. For this, the hyperparameters for the controller should be tuned so the simulation can run as intended, with the car staying in the driveable portion of the road.
+
+##Project Rubic Reflection
+
+###Describe the effect each of the P, I, D components had in your implementation.
+
+* **Proportional gain:** Describes the change in the output to reduce the error reported by the system. In this case, the cross-track error (CTE) that describes how far from the center of the road is the vehicle compared with the trajectory followed by the steering taken as input. The proportional gain accounts for the present values of the error, and how large will be the change to the original input. If the error is large, the change is going to be large. This value had the most direct effect in the vehicles steering, causing large corrections to the trajectory (for example, is the error indicated that the car was to far on the left of the center the road, a large correction to the right will be applied).
+* **Integral gain:** This value describes the change of the output based on the cumulative sum of the past errors. This value has a subtle change, making the steering more smooth on paths were the error can be too big causing a disproportional response from the proportional gain value (like in the exit of the bridge in the simulator). This value compensates for bias in the system, that are constant errors that affect the ouput of the system. By being the cumulative sum of the all the CTE, it will grow large enough to eventually correct the output, if the proportional response is not sufficiently strong to correct it.
+* **Derivative gain:** This gain takes in account the rate of change of the error, to avoid possible future trends of the error. This is represented as the tendency to overshoot and oscillate greatly trying to find the correct path. The derivative gain compensates the trend and reduces the oscillation, making the output to converge smoothly with the expected trajectory.
+
+###Describe how the final hyperparameters were chosen.
+
+The final parameters are `P = 0.389545 `,`I = 0.01`, `D = 7.757`. This values were first tuned by hand, so the twiddle process can give more accurate values, given that the wrong parameters can make the car steer out of the path making the run useless, and making the twiddle process longer and costly.
+
+After getting values that made possible the car in the simulator to go around the track without steering out of the road, I implemented the twiddle process. Every run was set as a track around the track (or 1185 meditions from the simulator) and after each run ended, the simulator was restarted to "train" the weights with consistent input from the same conditions. The best error  plateaued around 300 laps, and after that I did some manual tuning.
+
+The video of the laps with final parameters can be found in the next link.
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=lRMiXlFzydA" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a> 
 
 ## Dependencies
 
