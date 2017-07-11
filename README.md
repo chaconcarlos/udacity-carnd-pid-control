@@ -21,8 +21,8 @@ After getting values that made possible the car in the simulator to go around th
 
 The video of the laps with final parameters can be found in the next link.
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=lRMiXlFzydA" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
-alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a> 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=lRMiXlFzydA" target="_blank"><img src="http://img.youtube.com/vi/lRMiXlFzydA/0.jpg" 
+alt="run video" width="240" height="180" border="10" /></a> 
 
 ## Dependencies
 
